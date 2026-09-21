@@ -275,8 +275,8 @@ class NativeIapPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Purchas
 
         val (_, productDetailsList) = withContext(Dispatchers.IO) {
             suspendCoroutine<Pair<BillingResult, List<ProductDetails>>> { cont ->
-                billingClient.queryProductDetailsAsync(queryParams) { result, list ->
-                    cont.resume(result to (list ?: emptyList()))
+                billingClient.queryProductDetailsAsync(queryParams) { result, productDetailsResult ->
+                    cont.resume(result to productDetailsResult.productDetailsList)
                 }
             }
         }
@@ -328,8 +328,8 @@ class NativeIapPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Purchas
 
         val (_, productDetailsList) = withContext(Dispatchers.IO) {
             suspendCoroutine<Pair<BillingResult, List<ProductDetails>>> { cont ->
-                billingClient.queryProductDetailsAsync(queryParams) { result, list ->
-                    cont.resume(result to (list ?: emptyList()))
+                billingClient.queryProductDetailsAsync(queryParams) { result, productDetailsResult ->
+                    cont.resume(result to productDetailsResult.productDetailsList)
                 }
             }
         }
@@ -377,8 +377,8 @@ class NativeIapPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Purchas
 
             val (billingResult, productDetailsList) =
                 suspendCoroutine<Pair<BillingResult, List<ProductDetails>>> { cont ->
-                    billingClient.queryProductDetailsAsync(queryParams) { result, list ->
-                        cont.resume(result to (list ?: emptyList()))
+                    billingClient.queryProductDetailsAsync(queryParams) { result, productDetailsResult ->
+                        cont.resume(result to productDetailsResult.productDetailsList)
                     }
                 }
 
